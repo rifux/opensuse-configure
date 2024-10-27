@@ -113,7 +113,7 @@ name='suse-yast.directory'
 translate=true
 
 [folders/DevToolbox]
-apps=['io.github.fizzyizzy05.binary.desktop', 'org.godotengine.Godot.desktop', 'org.gaphor.Gaphor.desktop', 'net.werwolv.ImHex.desktop', 'io.github.nokse22.asciidraw.desktop', 'org.gnome.Meld.desktop', 'fyi.zoey.Boop-GTK.desktop', 'io.github.nokse22.minitext.desktop', 'com.mardojai.ForgeSparks.desktop', 'com.jetpackduba.Gitnuro.desktop']
+apps=['me.iepure.devtoolbox.desktop', 'io.github.fizzyizzy05.binary.desktop', 'net.werwolv.ImHex.desktop', 'org.godotengine.Godot.desktop', 'org.gaphor.Gaphor.desktop', 'io.github.nokse22.asciidraw.desktop', 'org.gnome.Meld.desktop', 'io.github.nokse22.minitext.desktop', 'com.mardojai.ForgeSparks.desktop', 'com.jetpackduba.Gitnuro.desktop']
 name='Dev. Toolbox'
 translate=false
 
@@ -388,7 +388,7 @@ script_print "Installing Productivity software: coding"
 flatinstall com.jetpackduba.Gitnuro
 flatinstall com.mardojai.ForgeSparks
 flatinstall io.github.nokse22.asciidraw
-flatinstall fyi.zoey.Boop-GTK
+flatinstall me.iepure.devtoolbox
 flatinstall io.github.fizzyizzy05.binary
 flatinstall net.werwolv.ImHex
 flatinstall org.gaphor.Gaphor
