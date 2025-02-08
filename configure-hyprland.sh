@@ -98,8 +98,8 @@ _defaults() {
     sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 1
     
     _log "Setting up app defaults"
-    xdg-mime default org.gnome.Nautilus.desktop inode/directorydu
-    xdg-settings set default-web-browser io.github.zen_browser.zen.desktop
+    xdg-mime default org.gnome.Nautilus.desktop inode/directory || true
+    xdg-settings set default-web-browser io.github.zen_browser.zen.desktop || true
 }
 
 _apps() {
