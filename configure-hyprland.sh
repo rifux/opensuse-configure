@@ -111,8 +111,6 @@ _apps() {
         \
         fish eza bat fd nnn btop progress bmon ncdu NetworkManager-tui fzf tealdeer zoxide \
         \
-        terminology terminology-theme-upstream terminology-theme-dark enlightenment enlightenment-branding-upstream \
-        \
         mpv \
         \
         mkvtoolnix-gui \
