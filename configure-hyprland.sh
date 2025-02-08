@@ -214,6 +214,7 @@ flatinstall org.gaphor.Gaphor
 flatinstall io.github.ungoogled_software.ungoogled_chromium
 
 _log "Installing Productivity software: general"
+flatinstall app.zen_browser.zen
 flatinstall org.garudalinux.firedragon
 flatinstall org.onlyoffice.desktopeditors
 flatinstall io.gitlab.idevecore.Pomodoro
