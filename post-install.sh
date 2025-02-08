@@ -148,7 +148,7 @@ customization_full()
 	customization_appDefaults
 }
 
-_print()
+_log()
 {
 	echo -e "\n\n\n[ $1.. ]"
 	sleep $sleep_time
@@ -197,33 +197,33 @@ cd P_O_S_T--I_N_S_T_A_L_L
 echo -e "$(pwd)"
 
 
-_print "Creating symlink 'zy' to 'zypper'"
+_log "Creating symlink 'zy' to 'zypper'"
 sudo ln -s /usr/bin/zypper /usr/bin/zy
 
 
-_print "Removing PackageKit aka 'kill my system instead of update'"
+_log "Removing PackageKit aka 'kill my system instead of update'"
 sudo zy rm -u PackageKit gnome-packagekit gnome-software-plugin-packagekit \
 	PackageKit-backend-zypp PackageKit-branding-upstream PackageKit-gstreamer-plugin \
  	PackageKit-gtk3-module typelib-1_0-PackageKitGlib-1_0
 
 
-_print "Disabling recommended packages and openSUSE branding in 'zypp' conf"
+_log "Disabling recommended packages and openSUSE branding in 'zypp' conf"
 sudo sed -i 's/# solver.onlyRequires = false/solver.onlyRequires = true/g' /etc/zypp/zypp.conf
 
 
-_print "Installing Vanilla Theming for installed software."
+_log "Installing Vanilla Theming for installed software."
 sudo zy in \
 	branding-upstream libreoffice-branding-upstream NetworkManager-branding-upstream \
 	gdm-branding-upstream gio-branding-upstream gnome-menus-branding-upstream \
 	gtk2-branding-upstream gtk3-branding-upstream gtk4-branding-upstream
 
 
-_print "Adding home:rifux.dev repository"
+_log "Adding home:rifux.dev repository"
 sudo zy --gpg-auto-import-keys ar -f https://download.opensuse.org/repositories/home:/rifux.dev/openSUSE_Tumbleweed/home:rifux.dev.repo
 sudo zy ref
 
 
-_print "Installing necessary software: work stuff, code editors, terminal, file manager, dev tools, etc."
+_log "Installing necessary software: work stuff, code editors, terminal, file manager, dev tools, etc."
 sudo zy in --no-confirm --auto-agree-with-licenses	\
 	neovim micro-editor helix \
 	\
@@ -265,11 +265,11 @@ sudo zy in --no-confirm --auto-agree-with-licenses	\
 	godot
 
 
-_print "Selecting python3 as python default"
+_log "Selecting python3 as python default"
 sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 1
 
 
-_print "Downloading usable Nerd Fonts"
+_log "Downloading usable Nerd Fonts"
 _gitSparceClone https://github.com/ryanoasis/nerd-fonts \
 	"patched-fonts/NerdFontsSymbolsOnly" \
  	"patched-fonts/Overpass" \
@@ -283,33 +283,33 @@ _gitSparceClone https://github.com/ryanoasis/nerd-fonts \
 	"patched-fonts/Monoid"
 
 
-_print "Installing fonts"
+_log "Installing fonts"
 find nerd-fonts -type f -name "*.ttf" -exec mv {} . \;
 rm -rf nerd-fonts
 sudo mv -v *.ttf /usr/share/fonts
 
 
-_print "Removing fish configs"
+_log "Removing fish configs"
 rm -rv /home/$usr/.config/fish
 
 
-_print "Enabling Docker service"
+_log "Enabling Docker service"
 sudo systemctl enable --now docker
 
 
-_print "Adding $usr to Docker"
+_log "Adding $usr to Docker"
 sudo usermod $usr -aG docker
 
 
-_print "Enabling Power Profiles Daemon service"
+_log "Enabling Power Profiles Daemon service"
 sudo systemctl enable --now power-profiles-daemon
 
 
-_print "Enabling 'zoxide'"
+_log "Enabling 'zoxide'"
 fish -c "zoxide init fish >> /home/$usr/.config/fish/zoxide.fish"
 
 
-_print "Installing aliases to fish shell"
+_log "Installing aliases to fish shell"
 _fetch https://raw.githubusercontent.com/rifux/dots/main/fish/aliases.fish
 mkdir -pv /home/$usr/.config/fish
 mv -v aliases.fish /home/$usr/.config/fish
@@ -321,14 +321,14 @@ source \$CONFIG_FISH_HOME/zoxide.fish
 EOL
 
 
-_print "Installing Flatpak apps"
+_log "Installing Flatpak apps"
 cat >./install_flatpak_apps.sh <<EOL
 #!/usr/bin/sh
 rm ./install_flatpak_apps.sh
 
 sleep_time=2
 
-_print()
+_log()
 {
 	echo -e "\\n\\n\\n[ \$1.. ]"
 	sleep $sleep_time
@@ -353,11 +353,11 @@ flatinstall()
 	done
 }
 
-_print "Installing LocalSend"
+_log "Installing LocalSend"
 flatinstall org.localsend.localsend_app
 
 
-_print "Installing Media apps"
+_log "Installing Media apps"
 flatinstall io.freetubeapp.FreeTube
 flatinstall com.github.neithern.g4music
 flatinstall com.github.unrud.VideoDownloader
@@ -369,11 +369,11 @@ flatinstall io.github.jliljebl.Flowblade
 flatinstall com.github.wwmm.easyeffects
 
 
-_print "Installing Upscayl"
+_log "Installing Upscayl"
 flatinstall org.upscayl.Upscayl
 
 
-_print "Installing Chatting software"
+_log "Installing Chatting software"
 flatinstall im.nheko.Nheko
 flatinstall im.fluffychat.Fluffychat
 flatinstall org.ferdium.Ferdium
@@ -381,7 +381,7 @@ flatinstall chat.revolt.RevoltDesktop
 flatinstall io.github.milkshiift.GoofCord
 
 
-_print "Installing Productivity software: coding"
+_log "Installing Productivity software: coding"
 flatinstall com.jetpackduba.Gitnuro
 flatinstall com.mardojai.ForgeSparks
 flatinstall io.github.nokse22.asciidraw
@@ -392,7 +392,7 @@ flatinstall org.gaphor.Gaphor
 flatinstall io.github.ungoogled_software.ungoogled_chromium
 
 
-_print "Installing Productivity software: general"
+_log "Installing Productivity software: general"
 flatinstall org.garudalinux.firedragon
 flatinstall org.onlyoffice.desktopeditors
 flatinstall io.gitlab.idevecore.Pomodoro
@@ -406,11 +406,11 @@ flatinstall io.github.wazzaps.Fingerpaint
 flatinstall io.github.amit9838.mousam
 
 
-_print "Installing customization software"
+_log "Installing customization software"
 flatinstall com.github.tchx84.Flatseal
 
 
-_print "Installing gaming software"
+_log "Installing gaming software"
 flatinstall page.kramo.Cartridges
 flatinstall org.ryujinx.Ryujinx
 
@@ -426,7 +426,7 @@ nohup $term "./install_flatpak_apps.sh" >> /dev/null 2>&1 &
 
 
 
-_print "Installing Media Codecs and VSCodium"
+_log "Installing Media Codecs and VSCodium"
 opi codecs 
 opi -n vscodium 
 
@@ -490,7 +490,7 @@ chmod +x install_vscodium_extensions.sh
 nohup $term "./install_vscodium_extensions.sh" >> /dev/null 2>&1 &
 
 
-_print "Applying VSCodium settings"
+_log "Applying VSCodium settings"
 mkdir -pv /home/$usr/.config/VSCodium/User/
 cat >/home/$usr/.config/VSCodium/User/settings.json <<EOL
 {
@@ -507,54 +507,54 @@ cat >/home/$usr/.config/VSCodium/User/settings.json <<EOL
 EOL
 
 
-_print "Installing LibreWolf"
+_log "Installing LibreWolf"
 sudo rpm --import https://rpm.librewolf.net/pubkey.gpg
 sudo zy ar -ef https://rpm.librewolf.net librewolf
 sudo zy ref 
 sudo zy in --no-confirm librewolf
 
 
-_print "Installing Epiphany"
+_log "Installing Epiphany"
 sudo zy in --no-confirm epiphany
 
 
-_print "Installing LunarVIM"
+_log "Installing LunarVIM"
 LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh)
 
 
-_print "Removing useless apps: Firefox, Transmission, Evolution"
+_log "Removing useless apps: Firefox, Transmission, Evolution"
 sudo zy rm -u MozillaFirefox transmission-gtk evolution
 
 
-_print "Changing $usr's shell to fish"
+_log "Changing $usr's shell to fish"
 sudo chsh $usr -s /usr/bin/fish
 
 
-_print "Installing fisher plugin installer for 'fish' shell"
+_log "Installing fisher plugin installer for 'fish' shell"
 fish -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
 
 
-_print "Installing TIDE prompt for 'fish' shell"
+_log "Installing TIDE prompt for 'fish' shell"
 fish -c "fisher install IlanCosman/tide"
 
 
-_print "Installing fzf hotkeys for 'fish' shell"
+_log "Installing fzf hotkeys for 'fish' shell"
 fish -c "fisher install PatrickF1/fzf.fish"
 
 
-_print "Installing 'done notifications' for 'fish' shell"
+_log "Installing 'done notifications' for 'fish' shell"
 fish -c "fisher install franciscolourenco/done"
 
 
-_print "Installing 'auto-complete matching pairs' for 'fish' shell"
+_log "Installing 'auto-complete matching pairs' for 'fish' shell"
 fish -c "fisher install jorgebucaran/autopair.fish"
 
 
-_print "Updating 'tealdeer'"
+_log "Updating 'tealdeer'"
 tldr --update
 
 
-_print "Upgrading openSUSE"
+_log "Upgrading openSUSE"
 sudo zy dup --allow-arch-change
 
 
@@ -564,7 +564,7 @@ sleep 7
 fish -c "tide configure"
 
 
-_print "Configuring GNOME App Picker Layout and App Defaults"
+_log "Configuring GNOME App Picker Layout and App Defaults"
 customization_full
 
 
