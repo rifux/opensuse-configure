@@ -233,9 +233,10 @@ flatinstall org.ryujinx.Ryujinx
 echo -e "[ THE SCRIPT IS DONE. EXITING IN 5sec. ]"
 sleep 5
 EOL
-    chmod +x install_flatpak_apps.sh
-    nohup "$term" "./install_flatpak_apps.sh" >> /dev/null 2>&1 &
-
+    bash install_flatpak_apps.sh
+    #chmod +x install_flatpak_apps.sh
+    #nohup "$term" "./install_flatpak_apps.sh" >> /dev/null 2>&1 &
+    
     _log "Removing useless apps: Firefox, Transmission, Evolution"
     sudo zy rm -u MozillaFirefox transmission-gtk evolution || true
 }
@@ -293,8 +294,9 @@ codium --install-extension pr1sm8.theme-panda
 echo -e "[ THE SCRIPT IS DONE. EXITING IN 5sec. ]"
 sleep 5
 EOL
-    chmod +x install_vscodium_extensions.sh
-    nohup "$term" "./install_vscodium_extensions.sh" >> /dev/null 2>&1 &
+    bash install_vscodium_extensions.sh
+    #chmod +x install_vscodium_extensions.sh
+    #nohup "$term" "./install_vscodium_extensions.sh" >> /dev/null 2>&1 &
 
     _log "Applying VSCodium settings"
     mkdir -pv "/home/$usr/.config/VSCodium/User/"
