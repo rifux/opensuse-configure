@@ -98,6 +98,8 @@ _defaults() {
 }
 
 _apps() {
+    cd "$t"
+
     _log "Installing necessary software: work stuff, code editors, terminal, file manager, dev tools, etc."
     sudo zy in --no-confirm --auto-agree-with-licenses	\
         neovim micro-editor helix \
@@ -372,6 +374,7 @@ _end() {
 }
 
 _program() {
+    mkdir -p "$t"
     _zypper
     _fonts
     _apps
