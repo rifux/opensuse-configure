@@ -179,11 +179,11 @@ for arg in $*; do case $arg in
      	exit
         ;;
     apps | configure-apps | appmenu | menu | app-picker | app-picker-layout | apppicker )
-        customization_appPicker
-	customization_appPicker
- 	customization_appPicker
-        customization_appPicker
-	customization_appPicker
+    	customization_appPicker
+		customization_appPicker
+		customization_appPicker
+		customization_appPicker
+		customization_appPicker
  	echo -e "> App-picker layout should be configured now"
   	exit
 	;;
@@ -262,7 +262,7 @@ sudo zy in --no-confirm --auto-agree-with-licenses	\
  	\
   	torbrowser-launcher falkon angelfish \
    	\
-    	godot
+	godot
 
 
 script_print "Selecting python3 as python default"
@@ -358,11 +358,8 @@ flatinstall org.localsend.localsend_app
 
 
 script_print "Installing Media apps"
-# flatinstall com.github.geigi.cozy
 flatinstall io.freetubeapp.FreeTube
-# flatinstall io.gitlab.zehkira.Monophony
 flatinstall com.github.neithern.g4music
-# flatinstall io.bassi.Amberol
 flatinstall com.github.unrud.VideoDownloader
 flatinstall net.fasterland.converseen
 flatinstall garden.jamie.Morphosis
@@ -403,9 +400,6 @@ flatinstall io.github.alainm23.planify
 flatinstall com.github.flxzt.rnote
 flatinstall com.github.tenderowl.frog
 flatinstall com.beavernotes.beavernotes
-# flatinstall com.toolstack.Folio
-# flatinstall io.github.mrvladus.List
-# flatinstall io.github.diegoivanme.flowtime
 flatinstall org.kde.CrowTranslate
 flatinstall io.github.nokse22.minitext
 flatinstall io.github.wazzaps.Fingerpaint
@@ -413,7 +407,6 @@ flatinstall io.github.amit9838.mousam
 
 
 script_print "Installing customization software"
-# flatinstall page.codeberg.libre_menu_editor.LibreMenuEditor
 flatinstall com.github.tchx84.Flatseal
 
 
