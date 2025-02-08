@@ -148,18 +148,18 @@ customization_full()
 	customization_appDefaults
 }
 
-script_print()
+_print()
 {
 	echo -e "\n\n\n[ $1.. ]"
 	sleep $sleep_time
 }
 
-script_fetch()
+_fetch()
 {
 	wget --quiet --progress=bar --show-progress --tries=inf --waitretry=5 $1
 }
 
-script_gitSparceClone() {
+_gitSparceClone() {
 	pwd_dir=$(pwd)
 	git_repo_url="$1"
 	shift 1
@@ -197,33 +197,33 @@ cd P_O_S_T--I_N_S_T_A_L_L
 echo -e "$(pwd)"
 
 
-script_print "Creating symlink 'zy' to 'zypper'"
+_print "Creating symlink 'zy' to 'zypper'"
 sudo ln -s /usr/bin/zypper /usr/bin/zy
 
 
-script_print "Removing PackageKit aka 'kill my system instead of update'"
+_print "Removing PackageKit aka 'kill my system instead of update'"
 sudo zy rm -u PackageKit gnome-packagekit gnome-software-plugin-packagekit \
 	PackageKit-backend-zypp PackageKit-branding-upstream PackageKit-gstreamer-plugin \
  	PackageKit-gtk3-module typelib-1_0-PackageKitGlib-1_0
 
 
-script_print "Disabling recommended packages and openSUSE branding in 'zypp' conf"
+_print "Disabling recommended packages and openSUSE branding in 'zypp' conf"
 sudo sed -i 's/# solver.onlyRequires = false/solver.onlyRequires = true/g' /etc/zypp/zypp.conf
 
 
-script_print "Installing Vanilla Theming for installed software."
+_print "Installing Vanilla Theming for installed software."
 sudo zy in \
 	branding-upstream libreoffice-branding-upstream NetworkManager-branding-upstream \
 	gdm-branding-upstream gio-branding-upstream gnome-menus-branding-upstream \
 	gtk2-branding-upstream gtk3-branding-upstream gtk4-branding-upstream
 
 
-script_print "Adding home:rifux.dev repository"
+_print "Adding home:rifux.dev repository"
 sudo zy --gpg-auto-import-keys ar -f https://download.opensuse.org/repositories/home:/rifux.dev/openSUSE_Tumbleweed/home:rifux.dev.repo
 sudo zy ref
 
 
-script_print "Installing necessary software: work stuff, code editors, terminal, file manager, dev tools, etc."
+_print "Installing necessary software: work stuff, code editors, terminal, file manager, dev tools, etc."
 sudo zy in --no-confirm --auto-agree-with-licenses	\
 	neovim micro-editor helix \
 	\
@@ -265,12 +265,12 @@ sudo zy in --no-confirm --auto-agree-with-licenses	\
 	godot
 
 
-script_print "Selecting python3 as python default"
+_print "Selecting python3 as python default"
 sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 1
 
 
-script_print "Downloading usable Nerd Fonts"
-script_gitSparceClone https://github.com/ryanoasis/nerd-fonts \
+_print "Downloading usable Nerd Fonts"
+_gitSparceClone https://github.com/ryanoasis/nerd-fonts \
 	"patched-fonts/NerdFontsSymbolsOnly" \
  	"patched-fonts/Overpass" \
 	"patched-fonts/JetBrainsMono" \
@@ -283,34 +283,34 @@ script_gitSparceClone https://github.com/ryanoasis/nerd-fonts \
 	"patched-fonts/Monoid"
 
 
-script_print "Installing fonts"
+_print "Installing fonts"
 find nerd-fonts -type f -name "*.ttf" -exec mv {} . \;
 rm -rf nerd-fonts
 sudo mv -v *.ttf /usr/share/fonts
 
 
-script_print "Removing fish configs"
+_print "Removing fish configs"
 rm -rv /home/$usr/.config/fish
 
 
-script_print "Enabling Docker service"
+_print "Enabling Docker service"
 sudo systemctl enable --now docker
 
 
-script_print "Adding $usr to Docker"
+_print "Adding $usr to Docker"
 sudo usermod $usr -aG docker
 
 
-script_print "Enabling Power Profiles Daemon service"
+_print "Enabling Power Profiles Daemon service"
 sudo systemctl enable --now power-profiles-daemon
 
 
-script_print "Enabling 'zoxide'"
+_print "Enabling 'zoxide'"
 fish -c "zoxide init fish >> /home/$usr/.config/fish/zoxide.fish"
 
 
-script_print "Installing aliases to fish shell"
-script_fetch https://raw.githubusercontent.com/rifux/dots/main/fish/aliases.fish
+_print "Installing aliases to fish shell"
+_fetch https://raw.githubusercontent.com/rifux/dots/main/fish/aliases.fish
 mkdir -pv /home/$usr/.config/fish
 mv -v aliases.fish /home/$usr/.config/fish
 cat >/home/$usr/.config/fish/config.fish <<EOL
@@ -321,14 +321,14 @@ source \$CONFIG_FISH_HOME/zoxide.fish
 EOL
 
 
-script_print "Installing Flatpak apps"
+_print "Installing Flatpak apps"
 cat >./install_flatpak_apps.sh <<EOL
 #!/usr/bin/sh
 rm ./install_flatpak_apps.sh
 
 sleep_time=2
 
-script_print()
+_print()
 {
 	echo -e "\\n\\n\\n[ \$1.. ]"
 	sleep $sleep_time
@@ -353,11 +353,11 @@ flatinstall()
 	done
 }
 
-script_print "Installing LocalSend"
+_print "Installing LocalSend"
 flatinstall org.localsend.localsend_app
 
 
-script_print "Installing Media apps"
+_print "Installing Media apps"
 flatinstall io.freetubeapp.FreeTube
 flatinstall com.github.neithern.g4music
 flatinstall com.github.unrud.VideoDownloader
@@ -369,11 +369,11 @@ flatinstall io.github.jliljebl.Flowblade
 flatinstall com.github.wwmm.easyeffects
 
 
-script_print "Installing Upscayl"
+_print "Installing Upscayl"
 flatinstall org.upscayl.Upscayl
 
 
-script_print "Installing Chatting software"
+_print "Installing Chatting software"
 flatinstall im.nheko.Nheko
 flatinstall im.fluffychat.Fluffychat
 flatinstall org.ferdium.Ferdium
@@ -381,7 +381,7 @@ flatinstall chat.revolt.RevoltDesktop
 flatinstall io.github.milkshiift.GoofCord
 
 
-script_print "Installing Productivity software: coding"
+_print "Installing Productivity software: coding"
 flatinstall com.jetpackduba.Gitnuro
 flatinstall com.mardojai.ForgeSparks
 flatinstall io.github.nokse22.asciidraw
@@ -392,7 +392,7 @@ flatinstall org.gaphor.Gaphor
 flatinstall io.github.ungoogled_software.ungoogled_chromium
 
 
-script_print "Installing Productivity software: general"
+_print "Installing Productivity software: general"
 flatinstall org.garudalinux.firedragon
 flatinstall org.onlyoffice.desktopeditors
 flatinstall io.gitlab.idevecore.Pomodoro
@@ -406,11 +406,11 @@ flatinstall io.github.wazzaps.Fingerpaint
 flatinstall io.github.amit9838.mousam
 
 
-script_print "Installing customization software"
+_print "Installing customization software"
 flatinstall com.github.tchx84.Flatseal
 
 
-script_print "Installing gaming software"
+_print "Installing gaming software"
 flatinstall page.kramo.Cartridges
 flatinstall org.ryujinx.Ryujinx
 
@@ -426,7 +426,7 @@ nohup $term "./install_flatpak_apps.sh" >> /dev/null 2>&1 &
 
 
 
-script_print "Installing Media Codecs and VSCodium"
+_print "Installing Media Codecs and VSCodium"
 opi codecs 
 opi -n vscodium 
 
@@ -490,7 +490,7 @@ chmod +x install_vscodium_extensions.sh
 nohup $term "./install_vscodium_extensions.sh" >> /dev/null 2>&1 &
 
 
-script_print "Applying VSCodium settings"
+_print "Applying VSCodium settings"
 mkdir -pv /home/$usr/.config/VSCodium/User/
 cat >/home/$usr/.config/VSCodium/User/settings.json <<EOL
 {
@@ -507,54 +507,54 @@ cat >/home/$usr/.config/VSCodium/User/settings.json <<EOL
 EOL
 
 
-script_print "Installing LibreWolf"
+_print "Installing LibreWolf"
 sudo rpm --import https://rpm.librewolf.net/pubkey.gpg
 sudo zy ar -ef https://rpm.librewolf.net librewolf
 sudo zy ref 
 sudo zy in --no-confirm librewolf
 
 
-script_print "Installing Epiphany"
+_print "Installing Epiphany"
 sudo zy in --no-confirm epiphany
 
 
-script_print "Installing LunarVIM"
+_print "Installing LunarVIM"
 LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh)
 
 
-script_print "Removing useless apps: Firefox, Transmission, Evolution"
+_print "Removing useless apps: Firefox, Transmission, Evolution"
 sudo zy rm -u MozillaFirefox transmission-gtk evolution
 
 
-script_print "Changing $usr's shell to fish"
+_print "Changing $usr's shell to fish"
 sudo chsh $usr -s /usr/bin/fish
 
 
-script_print "Installing fisher plugin installer for 'fish' shell"
+_print "Installing fisher plugin installer for 'fish' shell"
 fish -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
 
 
-script_print "Installing TIDE prompt for 'fish' shell"
+_print "Installing TIDE prompt for 'fish' shell"
 fish -c "fisher install IlanCosman/tide"
 
 
-script_print "Installing fzf hotkeys for 'fish' shell"
+_print "Installing fzf hotkeys for 'fish' shell"
 fish -c "fisher install PatrickF1/fzf.fish"
 
 
-script_print "Installing 'done notifications' for 'fish' shell"
+_print "Installing 'done notifications' for 'fish' shell"
 fish -c "fisher install franciscolourenco/done"
 
 
-script_print "Installing 'auto-complete matching pairs' for 'fish' shell"
+_print "Installing 'auto-complete matching pairs' for 'fish' shell"
 fish -c "fisher install jorgebucaran/autopair.fish"
 
 
-script_print "Updating 'tealdeer'"
+_print "Updating 'tealdeer'"
 tldr --update
 
 
-script_print "Upgrading openSUSE"
+_print "Upgrading openSUSE"
 sudo zy dup --allow-arch-change
 
 
@@ -564,7 +564,7 @@ sleep 7
 fish -c "tide configure"
 
 
-script_print "Configuring GNOME App Picker Layout and App Defaults"
+_print "Configuring GNOME App Picker Layout and App Defaults"
 customization_full
 
 
