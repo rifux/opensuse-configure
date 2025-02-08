@@ -42,7 +42,7 @@ _zypper() {
     _log "Removing PackageKit aka 'kill my system instead of update'"
     sudo zy rm -u PackageKit gnome-packagekit gnome-software-plugin-packagekit \
 	    PackageKit-backend-zypp PackageKit-gstreamer-plugin \
- 	    PackageKit-gtk3-module typelib-1_0-PackageKitGlib-1_0
+ 	    PackageKit-gtk3-module typelib-1_0-PackageKitGlib-1_0 || true
 
     _log "Disabling recommended packages and openSUSE branding in 'zypp' conf"
     sudo sed -i 's/# solver.onlyRequires = false/solver.onlyRequires = true/g' /etc/zypp/zypp.conf
@@ -235,7 +235,7 @@ EOL
     nohup "$term" "./install_flatpak_apps.sh" >> /dev/null 2>&1 &
 
     _log "Removing useless apps: Firefox, Transmission, Evolution"
-    sudo zy rm -u MozillaFirefox transmission-gtk evolution
+    sudo zy rm -u MozillaFirefox transmission-gtk evolution || true
 }
 
 _codium() {
