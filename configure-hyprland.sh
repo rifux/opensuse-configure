@@ -73,6 +73,9 @@ _system() {
 
 _fonts() {
     cd "$t"
+    if [ -d nerd-fonts ]; then
+        rm -rf nerd-fonts
+    fi
     _log "Istalling usable Nerd Fonts"
     _gitSparceClone https://github.com/ryanoasis/nerd-fonts \
         "patched-fonts/NerdFontsSymbolsOnly" \
