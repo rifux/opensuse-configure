@@ -321,6 +321,9 @@ EOL
 
 _hyprland() {
     _log "Install Hyprland with advanced dotfiles"
+    if [ -d opensuse-hyprland ]; then
+        rm -rf opensuse-hyprland
+    fi
     git clone https://github.com/rifux/opensuse-hyprland
     cd opensuse-hyprland
     bash install.sh
