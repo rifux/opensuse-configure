@@ -34,12 +34,14 @@ _gitSparceClone() {
 }
 
 _zypper() {
-    _log "Creating symlink 'zy' to 'zypper'"
-    sudo ln -s /usr/bin/zypper /usr/bin/zy
+    if [ ! -L /usr/bin/zy ]; then
+        _log "Creating symlink 'zy' to 'zypper'"
+        sudo ln -s /usr/bin/zypper /usr/bin/zy
+    fi
 
     _log "Removing PackageKit aka 'kill my system instead of update'"
     sudo zy rm -u PackageKit gnome-packagekit gnome-software-plugin-packagekit \
-	    PackageKit-backend-zypp PackageKit-branding-upstream PackageKit-gstreamer-plugin \
+	    PackageKit-backend-zypp PackageKit-gstreamer-plugin \
  	    PackageKit-gtk3-module typelib-1_0-PackageKitGlib-1_0
 
     _log "Disabling recommended packages and openSUSE branding in 'zypp' conf"
