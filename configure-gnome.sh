@@ -12,19 +12,16 @@ usr=$(whoami)
 clear
 sleep_time=2
 
-mkdir P_O_S_T--I_N_S_T_A_L_L
-cd P_O_S_T--I_N_S_T_A_L_L
-echo -e "$(pwd)"
 term="gnome-terminal --"
 
-app_picker()
+customization_appPicker()
 {
 	dconf load /org/gnome/desktop/app-folders/ <<EOF
 [/]
 folder-children=['Utilities', 'YaST', 'Pardus', 'eConfig', 'SysConfig', 'Games', 'Chatting', 'DevToolbox', 'LOffice', 'BoardGames', 'WebBrowsers', 'DiskUtilities', 'SysObserving', 'GNOMEApps', 'Productivity', 'Unused', 'CLIApps', 'MediaEditing', 'TextWorks', 'DLs', 'utils']
 
 [folders/MediaEditing]
-apps=['io.github.jliljebl.Flowblade.desktop', 'gimp.desktop', 'org.upscayl.Upscayl.desktop', 'net.fasterland.converseen.desktop', 'pinta.desktop', 'org.bunkus.mkvtoolnix-gui.desktop']
+apps=['io.github.jliljebl.Flowblade.desktop', 'gimp.desktop', 'org.upscayl.Upscayl.desktop', 'net.fasterland.converseen.desktop', 'garden.jamie.Morphosis.desktop', 'pinta.desktop', 'org.bunkus.mkvtoolnix-gui.desktop']
 name='Media Editing'
 translate=false
 
@@ -34,7 +31,7 @@ name='Board Games'
 translate=false
 
 [folders/DiskUtilities]
-apps=['org.gnome.DiskUtility.desktop', 'org.gnome.baobab.desktop', 'org.bleachbit.BleachBit.desktop', 'org.bleachbit.BleachBit-root.desktop']
+apps=['com.github.qarmin.czkawka.desktop', 'org.gnome.DiskUtility.desktop', 'org.gnome.baobab.desktop', 'org.bleachbit.BleachBit.desktop', 'org.bleachbit.BleachBit-root.desktop']
 name='Disk Utilities'
 translate=false
 
@@ -49,7 +46,7 @@ name='Productivity'
 translate=false
 
 [folders/utils]
-apps=['nemo.desktop', 'org.gnome.Evince.desktop', 'org.gnome.FileRoller.desktop', 'org.gnome.Shotwell.desktop', 'mpv.desktop', 'org.gnome.Music.desktop']
+apps=['nemo.desktop', 'org.gnome.Evince.desktop', 'org.gnome.FileRoller.desktop', 'org.gnome.Shotwell.desktop', 'org.xfce.ristretto.desktop', 'mpv.desktop', 'org.gnome.Music.desktop']
 name='Utilities'
 translate=false
 
@@ -69,12 +66,12 @@ name='GNOME Apps'
 translate=false
 
 [folders/TextWorks]
-apps=['com.github.tenderowl.frog.desktop', 'io.crow_translate.CrowTranslate.desktop', 'org.gnome.Characters.desktop']
+apps=['com.github.tenderowl.frog.desktop', 'org.kde.CrowTranslate.desktop', 'org.gnome.Characters.desktop']
 name='OCR, Translate, Text'
 translate=false
 
 [folders/WebBrowsers]
-apps=['librewolf.desktop', 'io.github.ungoogled_software.ungoogled_chromium.desktop', 'org.gnome.Epiphany.desktop', 'torbrowser.desktop', 'org.kde.angelfish.desktop', 'torbrowser-settings.desktop']
+apps=['librewolf.desktop', 'org.garudalinux.firedragon.desktop', 'io.github.ungoogled_software.ungoogled_chromium.desktop', 'org.gnome.Epiphany.desktop', 'torbrowser.desktop', 'org.kde.angelfish.desktop', 'torbrowser-settings.desktop', 'org.kde.falkon.desktop']
 name='Web Browsers'
 translate=false
 
@@ -89,7 +86,7 @@ name='Downloaders'
 translate=false
 
 [folders/SysConfig]
-apps=['org.gnome.Settings.desktop', 'org.gnome.Extensions.desktop', 'ca.desrt.dconf-editor.desktop', 'org.gnome.tweaks.desktop', 'com.github.wwmm.easyeffects.desktop', 'org.gnome.seahorse.Application.desktop', 'com.github.tchx84.Flatseal.desktop', 'system-config-printer.desktop', 'enlightenment_fprint.desktop', 'vinagre.desktop', 'gpk-prefs.desktop', 'org.gnome.PackageUpdater.desktop']
+apps=['org.gnome.Settings.desktop', 'com.mattjakeman.ExtensionManager.desktop', 'org.gnome.Extensions.desktop', 'ca.desrt.dconf-editor.desktop', 'org.gnome.tweaks.desktop', 'com.github.wwmm.easyeffects.desktop', 'org.gnome.seahorse.Application.desktop', 'com.github.tchx84.Flatseal.desktop', 'system-config-printer.desktop', 'enlightenment_fprint.desktop', 'vinagre.desktop', 'gpk-prefs.desktop', 'org.gnome.PackageUpdater.desktop']
 name='Sys. Configuration'
 translate=false
 
@@ -116,7 +113,7 @@ name='suse-yast.directory'
 translate=true
 
 [folders/DevToolbox]
-apps=['io.github.fizzyizzy05.binary.desktop', 'org.gaphor.Gaphor.desktop', 'net.werwolv.ImHex.desktop', 'io.github.nokse22.asciidraw.desktop', 'org.gnome.Meld.desktop', 'fyi.zoey.Boop-GTK.desktop', 'io.github.nokse22.minitext.desktop', 'com.mardojai.ForgeSparks.desktop', 'com.jetpackduba.Gitnuro.desktop']
+apps=['me.iepure.devtoolbox.desktop', 'io.github.fizzyizzy05.binary.desktop', 'net.werwolv.ImHex.desktop', 'org.godotengine.Godot.desktop', 'org.gaphor.Gaphor.desktop', 'io.github.nokse22.asciidraw.desktop', 'org.gnome.Meld.desktop', 'io.github.nokse22.minitext.desktop', 'com.mardojai.ForgeSparks.desktop', 'com.jetpackduba.Gitnuro.desktop']
 name='Dev. Toolbox'
 translate=false
 
@@ -126,26 +123,43 @@ name='Sys. Observing'
 translate=false
 
 [folders/Games]
-apps=['page.kramo.Cartridges.desktop', 'org.ryujinx.Ryujinx.desktop', 'org.godotengine.Godot.desktop']
+apps=['page.kramo.Cartridges.desktop', 'org.ryujinx.Ryujinx.desktop']
 name='Games'
 
 EOF
 	gsettings set org.gnome.shell favorite-apps "[]"
 	gsettings set org.gnome.shell app-picker-layout "[{'org.ferdium.Ferdium.desktop': <{'position': <0>}>, 'Chatting': <{'position': <1>}>, 'com.github.neithern.g4music.desktop': <{'position': <2>}>, 'MediaEditing': <{'position': <3>}>, 'org.gnome.Software.desktop': <{'position': <4>}>, 'DLs': <{'position': <5>}>, 'org.localsend.localsend_app.desktop': <{'position': <6>}>, 'WebBrowsers': <{'position': <7>}>, 'simple-scan.desktop': <{'position': <8>}>, 'TextWorks': <{'position': <9>}>, 'io.github.amit9838.mousam.desktop': <{'position': <10>}>, 'utils': <{'position': <11>}>, 'org.gnome.Calculator.desktop': <{'position': <12>}>, 'GNOMEApps': <{'position': <13>}>}, {'org.onlyoffice.desktopeditors.desktop': <{'position': <0>}>, 'LOffice': <{'position': <1>}>, 'thunderbird.desktop': <{'position': <2>}>, 'Productivity': <{'position': <3>}>, 'codium.desktop': <{'position': <4>}>, 'DevToolbox': <{'position': <5>}>, 'terminology.desktop': <{'position': <6>}>, 'CLIApps': <{'position': <7>}>}, {'info.febvre.Komikku.desktop': <{'position': <0>}>, 'io.freetubeapp.FreeTube.desktop': <{'position': <1>}>, 'Games': <{'position': <2>}>, 'BoardGames': <{'position': <3>}>}, {'org.gnome.Boxes.desktop': <{'position': <0>}>, 'virtualbox.desktop': <{'position': <1>}>, 'SysConfig': <{'position': <2>}>, 'SysObserving': <{'position': <3>}>, 'DiskUtilities': <{'position': <4>}>, 'org.opensuse.YaST.desktop': <{'position': <5>}>, 'YaST': <{'position': <6>}>, 'eConfig': <{'position': <7>}>, 'org.keepassxc.KeePassXC.desktop': <{'position': <8>}>, 'Unused': <{'position': <9>}>}]"
+	gsettings set org.gnome.desktop.interface clock-show-seconds true
 }
 
-print()
+customization_appDefaults()
+{
+	xdg-mime default nemo.desktop inode/directory   	# Nemo as default File Manager
+	xdg-settings set default-web-browser librewolf.desktop	# LibreWolf as default web browser
+}
+
+customization_full()
+{
+	customization_appPicker
+ 	customization_appPicker
+	customization_appPicker
+	customization_appPicker
+	customization_appPicker
+	customization_appDefaults
+}
+
+_log()
 {
 	echo -e "\n\n\n[ $1.. ]"
 	sleep $sleep_time
 }
 
-fetch()
+_fetch()
 {
 	wget --quiet --progress=bar --show-progress --tries=inf --waitretry=5 $1
 }
 
-git_sparse_clone() {
+_gitSparceClone() {
 	pwd_dir=$(pwd)
 	git_repo_url="$1"
 	shift 1
@@ -158,33 +172,64 @@ git_sparse_clone() {
 
 
 
-print "Creating symlink 'zy' to 'zypper'"
+
+for arg in $*; do case $arg in
+    custom | customization | dots | dot-files | dotfiles | .files )
+    	customization_full
+     	exit
+        ;;
+    apps | configure-apps | appmenu | menu | app-picker | app-picker-layout | apppicker )
+    	customization_appPicker
+		customization_appPicker
+		customization_appPicker
+		customization_appPicker
+		customization_appPicker
+ 	echo -e "> App-picker layout should be configured now"
+  	exit
+	;;
+esac; shift; done
+
+
+
+
+mkdir P_O_S_T--I_N_S_T_A_L_L
+cd P_O_S_T--I_N_S_T_A_L_L
+echo -e "$(pwd)"
+
+
+_log "Creating symlink 'zy' to 'zypper'"
 sudo ln -s /usr/bin/zypper /usr/bin/zy
 
 
-print "Removing PackageKit aka 'kill my system instead of update'"
-sudo zy rm -u PackageKit
+_log "Removing PackageKit aka 'kill my system instead of update'"
+sudo zy rm -u PackageKit gnome-packagekit gnome-software-plugin-packagekit \
+	PackageKit-backend-zypp PackageKit-branding-upstream PackageKit-gstreamer-plugin \
+ 	PackageKit-gtk3-module typelib-1_0-PackageKitGlib-1_0
 
 
-print "Disabling recommended packages and openSUSE branding in 'zypp' conf"
-sudo sed --quiet 's/# solver.onlyRequires = false/solver.onlyRequires = true/' /etc/zypp/zypp.conf
+_log "Disabling recommended packages and openSUSE branding in 'zypp' conf"
+sudo sed -i 's/# solver.onlyRequires = false/solver.onlyRequires = true/g' /etc/zypp/zypp.conf
 
 
-print "Installing Vanilla Theming for installed software."
+_log "Installing Vanilla Theming for installed software."
 sudo zy in \
 	branding-upstream libreoffice-branding-upstream NetworkManager-branding-upstream \
 	gdm-branding-upstream gio-branding-upstream gnome-menus-branding-upstream \
 	gtk2-branding-upstream gtk3-branding-upstream gtk4-branding-upstream
 
 
+_log "Adding home:rifux.dev repository"
+sudo zy --gpg-auto-import-keys ar -f https://download.opensuse.org/repositories/home:/rifux.dev/openSUSE_Tumbleweed/home:rifux.dev.repo
+sudo zy ref
 
-print "Installing necessary software: work stuff, code editors, terminal, file manager, dev tools, etc."
+
+_log "Installing necessary software: work stuff, code editors, terminal, file manager, dev tools, etc."
 sudo zy in --no-confirm --auto-agree-with-licenses	\
 	neovim micro-editor helix \
 	\
 	fish eza bat fd nnn btop progress bmon ncdu NetworkManager-tui fzf tealdeer zoxide \
 	\
-	terminology terminology-theme-upstream enlightenment enlightenment-branding-upstream \
+	terminology terminology-theme-upstream terminology-theme-dark enlightenment enlightenment-branding-upstream \
 	\
 	mpv \
 	\
@@ -197,13 +242,13 @@ sudo zy in --no-confirm --auto-agree-with-licenses	\
 	\
 	golang gopls git \
 	\
-	gnome-power-manager power-profiles-daemon \
+	extension-manager gnome-power-manager power-profiles-daemon \
 	\
 	opi \
 	\
 	docker \
 	\
-	pinta shotwell \
+	pinta shotwell ristretto \
 	\
 	jetbrains-mono-fonts fetchmsttfonts \
 	\
@@ -211,17 +256,21 @@ sudo zy in --no-confirm --auto-agree-with-licenses	\
 	\
 	MozillaThunderbird \
 	\
-	bleachbit \
+	bleachbit czkawka \
 	\
 	gnome-boxes virtualbox \
  	\
-  	torbrowser-launcher angelfish \
+  	torbrowser-launcher falkon angelfish \
    	\
-    	godot
+	godot
 
 
-print "Downloading usable Nerd Fonts"
-git_sparse_clone https://github.com/ryanoasis/nerd-fonts \
+_log "Selecting python3 as python default"
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 1
+
+
+_log "Downloading usable Nerd Fonts"
+_gitSparceClone https://github.com/ryanoasis/nerd-fonts \
 	"patched-fonts/NerdFontsSymbolsOnly" \
  	"patched-fonts/Overpass" \
 	"patched-fonts/JetBrainsMono" \
@@ -234,34 +283,34 @@ git_sparse_clone https://github.com/ryanoasis/nerd-fonts \
 	"patched-fonts/Monoid"
 
 
-print "Installing fonts"
+_log "Installing fonts"
 find nerd-fonts -type f -name "*.ttf" -exec mv {} . \;
 rm -rf nerd-fonts
 sudo mv -v *.ttf /usr/share/fonts
 
 
-print "Removing fish configs"
+_log "Removing fish configs"
 rm -rv /home/$usr/.config/fish
 
 
-print "Enabling Docker service"
+_log "Enabling Docker service"
 sudo systemctl enable --now docker
 
 
-print "Adding $usr to Docker"
+_log "Adding $usr to Docker"
 sudo usermod $usr -aG docker
 
 
-print "Enabling Power Profiles Daemon service"
+_log "Enabling Power Profiles Daemon service"
 sudo systemctl enable --now power-profiles-daemon
 
 
-print "Enabling 'zoxide'"
+_log "Enabling 'zoxide'"
 fish -c "zoxide init fish >> /home/$usr/.config/fish/zoxide.fish"
 
 
-print "Installing aliases to fish shell"
-fetch https://raw.githubusercontent.com/rifux/dots/main/fish/aliases.fish
+_log "Installing aliases to fish shell"
+_fetch https://raw.githubusercontent.com/rifux/dots/main/fish/aliases.fish
 mkdir -pv /home/$usr/.config/fish
 mv -v aliases.fish /home/$usr/.config/fish
 cat >/home/$usr/.config/fish/config.fish <<EOL
@@ -272,11 +321,14 @@ source \$CONFIG_FISH_HOME/zoxide.fish
 EOL
 
 
-print "Installing Flatpak apps"
+_log "Installing Flatpak apps"
 cat >./install_flatpak_apps.sh <<EOL
 #!/usr/bin/sh
 rm ./install_flatpak_apps.sh
-print()
+
+sleep_time=2
+
+_log()
 {
 	echo -e "\\n\\n\\n[ \$1.. ]"
 	sleep $sleep_time
@@ -284,72 +336,81 @@ print()
 
 flatinstall()
 {
+	# Main loop to install and check the package
+	while true; do
+	# Attempt to install the package
 	sudo flatpak install --system --assumeyes \$1
+	
+	# Check if the package is installed
+	if ! [ -z "\$(flatpak list --app | grep "\$1")" ]; then
+		echo "\$1 successfully installed."
+		break
+	else
+		# Wait for the specified delay before retrying
+		echo "Installation failed. Retrying in \$((sleep_time * 3)) seconds..."
+		sleep \$((sleep_time * 3))
+	fi
+	done
 }
 
-print "Installing LocalSend"
+_log "Installing LocalSend"
 flatinstall org.localsend.localsend_app
 
 
-print "Installing Media apps"
-# flatinstall com.github.geigi.cozy
+_log "Installing Media apps"
 flatinstall io.freetubeapp.FreeTube
-# flatinstall io.gitlab.zehkira.Monophony
 flatinstall com.github.neithern.g4music
-# flatinstall io.bassi.Amberol
 flatinstall com.github.unrud.VideoDownloader
 flatinstall net.fasterland.converseen
+flatinstall garden.jamie.Morphosis
 flatinstall info.febvre.Komikku
 flatinstall net.agalwood.Motrix
 flatinstall io.github.jliljebl.Flowblade
 flatinstall com.github.wwmm.easyeffects
 
 
-print "Installing Upscayl"
+_log "Installing Upscayl"
 flatinstall org.upscayl.Upscayl
 
 
-print "Installing Chatting software"
-flatinstall io.github.NhekoReborn.Nheko
+_log "Installing Chatting software"
+flatinstall im.nheko.Nheko
 flatinstall im.fluffychat.Fluffychat
 flatinstall org.ferdium.Ferdium
 flatinstall chat.revolt.RevoltDesktop
 flatinstall io.github.milkshiift.GoofCord
 
 
-print "Installing Productivity software: coding"
+_log "Installing Productivity software: coding"
 flatinstall com.jetpackduba.Gitnuro
 flatinstall com.mardojai.ForgeSparks
 flatinstall io.github.nokse22.asciidraw
-flatinstall fyi.zoey.Boop-GTK
+flatinstall me.iepure.devtoolbox
 flatinstall io.github.fizzyizzy05.binary
 flatinstall net.werwolv.ImHex
 flatinstall org.gaphor.Gaphor
 flatinstall io.github.ungoogled_software.ungoogled_chromium
 
 
-print "Installing Productivity software: general"
+_log "Installing Productivity software: general"
+flatinstall org.garudalinux.firedragon
 flatinstall org.onlyoffice.desktopeditors
 flatinstall io.gitlab.idevecore.Pomodoro
 flatinstall io.github.alainm23.planify
 flatinstall com.github.flxzt.rnote
 flatinstall com.github.tenderowl.frog
 flatinstall com.beavernotes.beavernotes
-# flatinstall com.toolstack.Folio
-# flatinstall io.github.mrvladus.List
-# flatinstall io.github.diegoivanme.flowtime
-flatinstall io.crow_translate.CrowTranslate
+flatinstall org.kde.CrowTranslate
 flatinstall io.github.nokse22.minitext
 flatinstall io.github.wazzaps.Fingerpaint
 flatinstall io.github.amit9838.mousam
 
 
-print "Installing customization software"
-# flatinstall page.codeberg.libre_menu_editor.LibreMenuEditor
+_log "Installing customization software"
 flatinstall com.github.tchx84.Flatseal
 
 
-print "Installing gaming software"
+_log "Installing gaming software"
 flatinstall page.kramo.Cartridges
 flatinstall org.ryujinx.Ryujinx
 
@@ -365,7 +426,7 @@ nohup $term "./install_flatpak_apps.sh" >> /dev/null 2>&1 &
 
 
 
-print "Installing Media Codecs and VSCodium"
+_log "Installing Media Codecs and VSCodium"
 opi codecs 
 opi -n vscodium 
 
@@ -429,7 +490,7 @@ chmod +x install_vscodium_extensions.sh
 nohup $term "./install_vscodium_extensions.sh" >> /dev/null 2>&1 &
 
 
-print "Applying VSCodium settings"
+_log "Applying VSCodium settings"
 mkdir -pv /home/$usr/.config/VSCodium/User/
 cat >/home/$usr/.config/VSCodium/User/settings.json <<EOL
 {
@@ -446,54 +507,54 @@ cat >/home/$usr/.config/VSCodium/User/settings.json <<EOL
 EOL
 
 
-print "Installing LibreWolf"
+_log "Installing LibreWolf"
 sudo rpm --import https://rpm.librewolf.net/pubkey.gpg
 sudo zy ar -ef https://rpm.librewolf.net librewolf
 sudo zy ref 
 sudo zy in --no-confirm librewolf
 
 
-print "Installing Epiphany"
+_log "Installing Epiphany"
 sudo zy in --no-confirm epiphany
 
 
-print "Installing LunarVIM"
+_log "Installing LunarVIM"
 LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh)
 
 
-print "Removing useless apps: Firefox, Transmission, Evolution"
+_log "Removing useless apps: Firefox, Transmission, Evolution"
 sudo zy rm -u MozillaFirefox transmission-gtk evolution
 
 
-print "Changing $usr's shell to fish"
+_log "Changing $usr's shell to fish"
 sudo chsh $usr -s /usr/bin/fish
 
 
-print "Installing fisher plugin installer for 'fish' shell"
+_log "Installing fisher plugin installer for 'fish' shell"
 fish -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
 
 
-print "Installing TIDE prompt for 'fish' shell"
+_log "Installing TIDE prompt for 'fish' shell"
 fish -c "fisher install IlanCosman/tide"
 
 
-print "Installing fzf hotkeys for 'fish' shell"
+_log "Installing fzf hotkeys for 'fish' shell"
 fish -c "fisher install PatrickF1/fzf.fish"
 
 
-print "Installing 'done notifications' for 'fish' shell"
+_log "Installing 'done notifications' for 'fish' shell"
 fish -c "fisher install franciscolourenco/done"
 
 
-print "Installing 'auto-complete matching pairs' for 'fish' shell"
+_log "Installing 'auto-complete matching pairs' for 'fish' shell"
 fish -c "fisher install jorgebucaran/autopair.fish"
 
 
-print "Updating 'tealdeer'"
+_log "Updating 'tealdeer'"
 tldr --update
 
 
-print "Upgrading openSUSE"
+_log "Upgrading openSUSE"
 sudo zy dup --allow-arch-change
 
 
@@ -503,12 +564,8 @@ sleep 7
 fish -c "tide configure"
 
 
-print "Configuring GNOME App Picker Layout"
-app_picker
-app_picker
-app_picker
-app_picker
-app_picker
+_log "Configuring GNOME App Picker Layout and App Defaults"
+customization_full
 
 
 end_time=$(date +%s)
