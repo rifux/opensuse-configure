@@ -140,7 +140,7 @@ _apps() {
         \
         gnome-boxes virtualbox \
         \
-        torbrowser-launcher falkon angelfish \
+        torbrowser-launcher \
         \
         godot
 
