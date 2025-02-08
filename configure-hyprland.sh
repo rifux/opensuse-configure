@@ -53,9 +53,11 @@ _zypper() {
         gdm-branding-upstream gio-branding-upstream gnome-menus-branding-upstream \
         gtk2-branding-upstream gtk3-branding-upstream gtk4-branding-upstream
 
-    _log "Adding home:rifux.dev repository"
-    sudo zy --gpg-auto-import-keys ar -f https://download.opensuse.org/repositories/home:/rifux.dev/openSUSE_Tumbleweed/home:rifux.dev.repo
-    sudo zy ref
+    if ! zypper lr --alias home_rifux.dev &>/dev/null; then    
+        _log "Adding home:rifux.dev repository"
+        sudo zypper --gpg-auto-import-keys ar -f https://download.opensuse.org/repositories/home:/rifux.dev/openSUSE_Tumbleweed/home:rifux.dev.repo
+        sudo zypper ref
+    fi
 }
 
 _system() {
