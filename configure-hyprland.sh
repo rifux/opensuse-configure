@@ -144,6 +144,11 @@ _apps() {
         \
         godot
 
+    sudo zy in --no-confirm qemu-kvm libvirt virt-manager
+    sudo zy in --no-confirm --recommends -t pattern kvm_server kvm_tools
+    sudo zy in --no-confirm qemu-hw-display-virtio-gpu qemu-hw-display-virtio-gpu-pci qemu-hw-display-virtio-vga
+    sudo zy in --no-confirm --recommends --force qemu
+
     opi codecs
 
     _log "Installing Flatpak apps"
